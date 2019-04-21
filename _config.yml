@@ -10,7 +10,7 @@ title: Alison Wyllie
 email: alison.wyllie@gmail.com
 description: My website yo
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://alisonwyllie.com" # the base hostname & protocol for your site
+url: "alisonthemonster.github.io" # the base hostname & protocol for your site
 twitter_username: hemang_kumar
 github_username:  alisonthemonster
 paginate: 5
