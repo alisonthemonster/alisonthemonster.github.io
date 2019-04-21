@@ -10,7 +10,7 @@ title: Alison Wyllie
 email: alison.wyllie@gmail.com
 description: My website yo
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "alisonthemonster.github.io" # the base hostname & protocol for your site
+url: "" # the base hostname & protocol for your site
 github_username:  alisonthemonster
 paginate: 5
 theme-dark: false #Set to true to change to dark website theme
