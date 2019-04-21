@@ -315,6 +315,7 @@ pre {
 }
 .postTitle {
   font-weight: 400;
+  font-family: 'IBM Plex Serif', serif;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -332,17 +333,17 @@ pre {
 }
 .site-title {
   font-size: 64px;
-  font-weight: 100;
-  font-family: 'PT Sans';
+  font-family: 'IBM Plex Serif', serif;
   text-transform: capitalize;
-  font-weight: 500;
+  font-weight: 100;
   margin-top: 1em;
 }
 .site-description {
   font-size: 14px;
   letter-spacing: 2px;
   text-indent: 6px;
-  font-family: 'Josefin Sans';
+  font-weight: 300;
+  font-family: 'IBM Plex Serif', serif;
 }
 .exclamationMark {
   padding-left: 2em;
@@ -522,7 +523,7 @@ pre {
   font-size: 38px;
 
   text-align: center;
-  font-family: "PT Sans";
+  font-family: 'IBM Plex Serif', serif;
   font-weight: 900;
   @include media-query($on-laptop) {
     font-size: 36px;
@@ -535,18 +536,21 @@ pre {
     font-size: 1.25rem;
   }
   h2 {
+    font-family: 'IBM Plex Serif', serif;
     font-size: 32px;
     @include media-query($on-laptop) {
       font-size: 28px;
     }
   }
   h3 {
+    font-family: 'IBM Plex Serif', serif;
     font-size: 26px;
     @include media-query($on-laptop) {
       font-size: 22px;
     }
   }
   h4 {
+    font-family: 'IBM Plex Serif', serif;
     font-size: 20px;
     @include media-query($on-laptop) {
       font-size: 18px;
