@@ -34,7 +34,7 @@ Presently is built using Android Architecture Components:
 
 
 ### Future Plans
-  - Themes, various colors and symbols for users to chose from
+  - Themes, various colors and symbols for users to choose from
   - Updated tooling for releases (using Fastlane and Gradle)
   - Use the Jetpack Paging library for the Timeline view
   - Search

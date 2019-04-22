@@ -20,7 +20,14 @@ layout: page
   <a class='postLink' href="{{site.url}}{{site.baseurl}}{{post.url}}">{{post.title}}</a>
   </div>
   <div class="postExt">
-    {{post.excerpt}}
+    {{post.excerpt | strip_html | truncate:200}}
+  </div>
+  <div>
+   {% for category in post.categories %} 
+      {% if category == "design" %} ✏️ {% endif %} 
+      {% if category == "projects" %} 💻 {% endif %} 
+      {% if category == "svap" %} 🏢 {% endif %} 
+   {% endfor %}
   </div>
 </div>
 {% endif %}

@@ -11,7 +11,7 @@ categories: ["android", "projects", "fivethings"]
 
 ### May 2017 - November 2017: Web client
 <img align="right" src="https://github.com/alisonthemonster/FiveThings/blob/master/static/images/Screen%20Shot%202017-11-08%20at%2010.32.56%20PM.png?raw=true"  height="260">
-[FiveThings.me](https://www.fivethings.me/) was written in vanllia Javascript, Node, and built with a Firebase backend. It uses Google Sign In and the Firebase Realtime Database. Users can log in, write new entries, and view their old entries. I still use this website every day to write down my Five Things.
+[FiveThings.me](https://www.fivethings.me/) was written in vanilla Javascript, Node, and built with a Firebase backend. It uses Google Sign In and the Firebase Realtime Database. Users can log in, write new entries, and view their old entries. I still use this website every day to write down my Five Things.
 
 
 
@@ -25,14 +25,14 @@ Read more about PDF generation and my design process [here]({{ site.baseurl }}{%
 I decided to rebuild the Android client this time with Kotlin. It was my first time using Kotlin and I learned a lot here. Again it used the Firebase Realtime Database and Google Sign In. I used the brand new Android Architecture components and followed an MVVM architecture. It had a swipe navigation to move between days and a navigation drawer to access the other views.
 
 ### April 2018 - September 2018: Android Client Phase 2, the new backend
-Inspired by great apps like Daylio, I realized I could measure the sentiment of my entries and chart it over time. I began to work with my good friend, Nagkumar, to build out a new backend that would be able to support sentiment analysis better than the Firebase Realtime Database. This meant rewriting authentication, using Retrofit/Okhttp to make the requests to our own server instead of Firebase, implenting a new search feature, and of course building out the new analytics feature.
+Inspired by great apps like Daylio, I realized I could measure the sentiment of my entries and chart it over time. I began to work with my good friend, Nagkumar, to build out a new backend that would be able to support sentiment analysis better than the Firebase Realtime Database. This meant rewriting authentication, using Retrofit/Okhttp to make the requests to our own server instead of Firebase, implementing a new search feature, and of course building out the new analytics feature.
 
 Read more about this phase of the Five Things Android app [here]({{ site.baseurl }}{% post_url 2018-04-15-fivethings %})!
 
 ### September 2018 - November 2018 Android Client Phase 3: A visual redesign
-Once the new backend was fully implemented I could focus on UX. I designed a series of onboarding illustrations, error states, and focused on animations. At this time I also updated the navgiation to a Bottom Navigation Bar with a FAB to open the calendar. 
+Once the new backend was fully implemented I could focus on UX. I designed a series of onboarding illustrations, error states, and focused on animations. At this time I also updated the navigation to a Bottom Navigation Bar with a FAB to open the calendar. 
 
 Read more about the UX of the Five Things Android app [here]({{ site.baseurl }}{% post_url 2018-11-17-fivethings %})!
 
 ### Today and beyond
-Work on the Five Things project has stopped for now. I still use the FiveThings.me website everday and plan to for the foreseeable future. There is still work to be done to support sentiment analysis and I have plenty of ideas for book designs to implement. 
+Work on the Five Things project has stopped for now. I still use the FiveThings.me website every day and plan to for the foreseeable future. There is still work to be done to support sentiment analysis and I have plenty of ideas for book designs to implement. 

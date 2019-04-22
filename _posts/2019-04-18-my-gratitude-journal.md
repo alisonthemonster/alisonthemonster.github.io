@@ -2,14 +2,14 @@
 layout: post
 title:  "My Gratitude Journal: a Google Assistant Action"
 date:   2019-04-18 20:45:31 +0530
-categories: ["projects"]
+categories: ["projects", "actions"]
 ---
-
-<img src="https://i.imgur.com/D8GRhdW.png">
 
 On March 2nd, 2019 I was lucky enough to get into Women Techmaker's International Women's Day Summit. I had a great time meeting other women in the industry and got the opportunity to try out a Codelab for the Google Assistant. I zoomed through the Codelab and couldn't wait to get home to try to build one of my own, Google even gave everyone a free Google Home Mini to take home for practice! Thank you! 🙇‍♀️
 
 Taking inspriation from [Presently]({{ site.baseurl }}{% post_url 2019-04-20-presently %}) I decided to build a gratitude journaling Assistant Action!
+
+<img src="https://i.imgur.com/D8GRhdW.png">
 
 
 ### Tech Stack
