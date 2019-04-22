@@ -4,7 +4,7 @@ title : About
 permalink: /about/
 ---
 
-<h2>Howdy! 🤠</h2>
+<h2>Hiya! 👩‍💻</h2>
 <p>Hi there! I'm a software engineer based out of Seattle, Washington. I currently work at Capital One as an Android Developer. When I'm not building Android apps you can find me scowering my local Goodwill or cataloging the Seattle vintage apartment scene. </p>
 
 <div style="text-align: center"><img src="https://i.imgur.com/O5ptInB.png" width="400" /></div>
