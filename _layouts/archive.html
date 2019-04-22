@@ -24,9 +24,12 @@ layout: page
   </div>
   <div>
    {% for category in post.categories %} 
-      {% if category == "design" %} ✏️ {% endif %} 
-      {% if category == "projects" %} 💻 {% endif %} 
-      {% if category == "svap" %} 🏢 {% endif %} 
+   {% if category == "design" %} ✏️ {% endif %} 
+   {% if category == "projects" %} 👩‍💻 {% endif %} 
+   {% if category == "svap" %} 🏢 {% endif %} 
+   {% if category == "fivethings" %} 🖐 {% endif %} 
+   {% if category == "android" %} 📱 {% endif %} 
+   {% if category == "actions" %} 🔈 {% endif %}
    {% endfor %}
   </div>
 </div>
