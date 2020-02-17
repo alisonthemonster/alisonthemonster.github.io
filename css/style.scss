@@ -333,7 +333,7 @@ pre {
 }
 .site-title {
   font-size: 64px;
-  font-family: 'IBM Plex Serif', serif;
+  font-family: 'Vidaloka', serif;
   text-transform: capitalize;
   font-weight: 100;
   margin-top: 1em;
@@ -523,7 +523,7 @@ pre {
   font-size: 38px;
 
   text-align: center;
-  font-family: 'IBM Plex Serif', serif;
+  font-family: 'Vidaloka', serif;
   font-weight: 900;
   @include media-query($on-laptop) {
     font-size: 36px;
@@ -536,14 +536,14 @@ pre {
     font-size: 1.25rem;
   }
   h2 {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Vidaloka', serif;
     font-size: 32px;
     @include media-query($on-laptop) {
       font-size: 28px;
     }
   }
   h3 {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Vidaloka', serif;
     font-size: 26px;
     @include media-query($on-laptop) {
       font-size: 22px;

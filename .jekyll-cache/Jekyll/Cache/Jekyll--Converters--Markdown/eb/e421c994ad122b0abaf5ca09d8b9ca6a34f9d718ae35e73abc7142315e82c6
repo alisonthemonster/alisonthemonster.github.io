@@ -1,0 +1,49 @@
+I"ˆ<p>Presently is an open source Android app you can use to write down daily gratitude entries. Users can navigate through a simple timeline view and to add and read entries. It was designed to be very minimal, with no extra bells and whistles. I built this app to fill the void for simple gratitude journaling apps and to try out Room. I also wanted to try my hand at some design, from the app icon to the Play Store assets.</p>
+
+<h3 id="features">Features</h3>
+<ul>
+  <li>Write and read gratitude journal entries</li>
+  <li>Export/import your entries to CSV</li>
+  <li>Reminder notifications</li>
+  <li>[Coming soon] Themes</li>
+</ul>
+
+<h3 id="tech-stack">Tech Stack</h3>
+<p>Presently is built using Android Architecture Components:</p>
+<ul>
+  <li>Room</li>
+  <li>Navigation</li>
+  <li>ViewModel</li>
+  <li>LiveData</li>
+  <li>Data binding</li>
+</ul>
+
+<h3 id="continuous-integration">Continuous Integration</h3>
+<ul>
+  <li>CircleCI with Github integration</li>
+  <li>Fastlane to manage my CI tasks
+    <ul>
+      <li>A lane to run unit tests and generate coverage</li>
+      <li>A lane to run static code analysis</li>
+      <li>A lane to build the app</li>
+      <li>[Coming soon] A lane to release the app and perform release related tasks</li>
+    </ul>
+  </li>
+  <li>Code coverage tracked using a <a href="https://github.com/alisonthemonster/Presently/blob/develop/app/jacoco.gradle">gradle task</a> that would calculate my Jacoco coverage</li>
+</ul>
+
+<h3 id="the-design">The Design</h3>
+<p><img src="https://i.imgur.com/Hs6kxWi.png" alt="Book templates" /></p>
+
+<h3 id="future-plans">Future Plans</h3>
+<ul>
+  <li>Themes, various colors and symbols for users to choose from</li>
+  <li>Updated tooling for releases (using Fastlane and Gradle)</li>
+  <li>Use the Jetpack Paging library for the Timeline view</li>
+  <li>Search</li>
+  <li>Integrate Github with Danger to put code coverage reports in pull requests</li>
+</ul>
+
+<p>Check it out here in the <a href="https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&amp;hl=en">Google Play Store</a>
+ and look at my source code on <a href="https://github.com/alisonthemonster/Presently">Github</a>!</p>
+:ET

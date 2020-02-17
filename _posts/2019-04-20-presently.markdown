@@ -2,7 +2,7 @@
 layout: post
 title:  "Presently: A Gratitude Journal App"
 date:   2019-04-20 19:45:31 +0530
-categories: ["projects", "android"]
+categories: ["projects", "android", "presently"]
 ---
 Presently is an open source Android app you can use to write down daily gratitude entries. Users can navigate through a simple timeline view and to add and read entries. It was designed to be very minimal, with no extra bells and whistles. I built this app to fill the void for simple gratitude journaling apps and to try out Room. I also wanted to try my hand at some design, from the app icon to the Play Store assets. 
 

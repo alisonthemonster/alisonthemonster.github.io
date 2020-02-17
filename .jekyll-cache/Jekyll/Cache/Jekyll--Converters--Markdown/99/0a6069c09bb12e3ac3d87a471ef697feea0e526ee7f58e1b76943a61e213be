@@ -1,0 +1,32 @@
+I"C<p>Presently is an open source <a href="https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&amp;hl=en">Android app</a> to record daily gratitude entries. It’s been a while since the initial release and I thought I’d post on update on all the new features and things I’ve learned along the way.</p>
+
+<h3 id="new-features">New Features</h3>
+<ul>
+  <li>Search your entries using Room’s FTS
+    <ul>
+      <li>Room introduced FTS back in late 2018 and it allows you to search through your data by creating a searchable virtual table. <a href="https://medium.com/@sienatime/enabling-sqlite-fts-in-room-2-1-75e17d0f0ff8">This blog</a> was incredibly useful for setting it all up.</li>
+    </ul>
+  </li>
+  <li>Calendar navigation
+    <ul>
+      <li>Many users had left reviews or reached out to me asking for a way to quickly move to old entries or to add an entry for a day further in the past than yesterday. I had a lot of fun here playing around with animations and working on the motion for opening the calendar.</li>
+    </ul>
+  </li>
+  <li>Themes
+    <ul>
+      <li>Picking the initial color scheme was such a hard choice that I knew from the start that I wanted to support multiple themes. I had a great time playing around with colors and I expect I’ll be adding new themes in the future.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="demo">Demo</h3>
+<blockquote class="imgur-embed-pub" lang="en" data-id="ad3PeDt"><a href="//imgur.com/ad3PeDt">View post on imgur.com</a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<h3 id="presently-app-website">Presently App Website</h3>
+<p>I also threw together a quick little demo website for Presently <a href="https://presently-app.firebaseapp.com/">here</a>.
+<img src="https://imgur.com/k8jCUdD.png" alt="Website Screenshot" /></p>
+
+<p>Check it out here in the <a href="https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&amp;hl=en">Google Play Store</a>
+ and look at my source code on <a href="https://github.com/alisonthemonster/Presently">Github</a>!</p>
+:ET

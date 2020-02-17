@@ -1,0 +1,2 @@
+I"'<p>At the end of January, Firebase announced that Cloud Firestore is moving out of beta and into general availability. Firestore is Firebase’s latest database solution, a NoSQL cloud database that’s designed to scale. Just like the Realtime Database before it, Firestore offers real time updates as well as offline support. Unlike Realtime Database, data is in Firestore is stored in documents and collections. (Find out which database is right for your project <a href="https://firebase.google.com/docs/firestore/rtdb-vs-firestore">here</a>)</p>
+:ET

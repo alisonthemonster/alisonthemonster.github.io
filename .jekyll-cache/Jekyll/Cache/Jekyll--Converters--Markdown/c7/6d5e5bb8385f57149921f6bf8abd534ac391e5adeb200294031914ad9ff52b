@@ -1,0 +1,115 @@
+I"�H<p>At the end of January, Firebase announced that Cloud Firestore is moving out of beta and into general availability. Firestore is Firebase’s latest database solution, a NoSQL cloud database that’s designed to scale. Just like the Realtime Database before it, Firestore offers real time updates as well as offline support. Unlike Realtime Database, data is in Firestore is stored in documents and collections. (Find out which database is right for your project <a href="https://firebase.google.com/docs/firestore/rtdb-vs-firestore">here</a>)</p>
+
+<p>Firestore doesn’t natively support full text search, but third party tools like Algolia are quite simple to set up. Algolia is a hosted search engine that enables you to build real time search interfaces with ease.</p>
+
+<p>In order for Algolia to be able to search our Firestore data we must provide it to Algolia. Using <strong>Cloud Functions</strong> we can listen for changes to our database and then write them to our Algolia indices. Here’s the instructions to <a href="https://firebase.google.com/docs/functions/get-started">get started with Cloud Functions</a>.</p>
+
+<p>Image you have an app of apartment listings that we want to search. Our apartment documents in Firestore look like this:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// /apartments/${apartment_id}</span>
+<span class="p">{</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="dl">"</span><span class="s2">101 1st Street</span><span class="dl">"</span>
+  <span class="nx">rent</span><span class="p">:</span> <span class="mf">1100.0</span>
+  <span class="nx">sqft</span><span class="p">:</span> <span class="mi">600</span>
+  <span class="nx">numBedrooms</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="nx">numBathrooms</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Using Firebase Cloud Functions we can listen to changes on our Firestore instance.</strong></p>
+
+<p>Our function will need access to our Algolia index. To do so we’ll take our Algolia credentials and add them to the Cloud Functions console. You’ll need the Application ID and the Admin API Key. You can add them using the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>firebase functions:config:set algolia.app_id<span class="o">=</span><span class="s2">"&lt;YOUR_APP_ID&gt;"</span> algolia.api_key<span class="o">=</span><span class="s2">"&lt;YOUR_API_KEY&gt;"</span>
+</code></pre></div></div>
+
+<p>Now we can access them in like so:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ALGOLIA_ID</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">config</span><span class="p">().</span><span class="nx">algolia</span><span class="p">.</span><span class="nx">app_id</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ALGOLIA_ADMIN_KEY</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">config</span><span class="p">().</span><span class="nx">algolia</span><span class="p">.</span><span class="nx">api_key</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And we’ll need the following lines to bring in Algolia and Firestore:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">algoliasearch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">algoliasearch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">functions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">firebase-functions</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We want to update our Algolia data whenever we add a new apartment, remove an apartment, or make a change to an apartment. We can do this by using <a href="https://firebase.google.com/docs/functions/firestore-events">Firestore Triggers</a>.</p>
+
+<p>First we’ll set up Algolia:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ALGOLIA_INDEX_NAME</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">apartments</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">algoliasearch</span><span class="p">(</span><span class="nx">ALGOLIA_ID</span><span class="p">,</span> <span class="nx">ALGOLIA_ADMIN_KEY</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Then we can start listening for changes.</p>
+
+<p><strong>Adding a new apartment document to Algolia:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentCreated</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onCreate</span><span class="p">((</span><span class="nx">snap</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Get the apartment's document</span>
+    <span class="kd">const</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">snap</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="c1">// Add an 'objectID' for Algolia</span>
+    <span class="nx">note</span><span class="p">.</span><span class="nx">objectID</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">;</span> 
+    <span class="c1">// Write to the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">saveObject</span><span class="p">(</span><span class="nx">note</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><strong>Deleting an apartment in Algolia:</strong></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentDeleted</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onDelete</span><span class="p">((</span><span class="nx">snap</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Delete an apartment from the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">deleteObject</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><strong>Updating an apartment in Algolia:</strong></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentEdited</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onUpdate</span><span class="p">((</span><span class="nx">change</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">newValue</span> <span class="o">=</span> <span class="nx">change</span><span class="p">.</span><span class="nx">after</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">previousValue</span> <span class="o">=</span> <span class="nx">change</span><span class="p">.</span><span class="nx">before</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="nx">newValue</span><span class="p">.</span><span class="nx">objectID</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">;</span>
+    <span class="c1">// Write the update to the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">saveObject</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Now you’re all set! You can deploy your functions with this command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>firebase deploy <span class="nt">--only</span> functions
+</code></pre></div></div>
+
+<p>You should be able to see your functions in the Cloud Functions console. Now when you make a change to your Firestore the changes should be sent to Algolia!
+Algolia has several integrations to make building your search interface. Now all you have to do is integrate a search field to your project. Algolia has tools to build search UIs for Android, iOS, React, Vue, and VanillaJS. Find out more here: https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/android/</p>
+
+<p>Here’s our full file:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">algoliasearch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">algoliasearch</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">functions</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">firebase-functions</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">ALGOLIA_ID</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">config</span><span class="p">().</span><span class="nx">algolia</span><span class="p">.</span><span class="nx">app_id</span><span class="p">;</span><span class="kd">const</span> <span class="nx">ALGOLIA_ADMIN_KEY</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">config</span><span class="p">().</span><span class="nx">algolia</span><span class="p">.</span><span class="nx">api_key</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">ALGOLIA_INDEX_NAME</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">apartments</span><span class="dl">'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">algoliasearch</span><span class="p">(</span><span class="nx">ALGOLIA_ID</span><span class="p">,</span> <span class="nx">ALGOLIA_ADMIN_KEY</span><span class="p">);</span>
+<span class="c1">//ADD APARTMENT</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentCreated</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onCreate</span><span class="p">((</span><span class="nx">snap</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Get the apartment's document</span>
+    <span class="kd">const</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">snap</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="c1">// Add an 'objectID' for Algolia</span>
+    <span class="nx">note</span><span class="p">.</span><span class="nx">objectID</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">;</span>
+    <span class="c1">// Write to the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">saveObject</span><span class="p">(</span><span class="nx">note</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">//REMOVE APARTMENT</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentDeleted</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onDelete</span><span class="p">((</span><span class="nx">snap</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Delete an apartment from the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">deleteObject</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">//EDIT APARTMENT</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">onApartmentEdited</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nb">document</span><span class="p">(</span><span class="dl">'</span><span class="s1">apartments/{apartmentId}</span><span class="dl">'</span><span class="p">).</span><span class="nx">onUpdate</span><span class="p">((</span><span class="nx">change</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">newValue</span> <span class="o">=</span> <span class="nx">change</span><span class="p">.</span><span class="nx">after</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">previousValue</span> <span class="o">=</span> <span class="nx">change</span><span class="p">.</span><span class="nx">before</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+    <span class="nx">newValue</span><span class="p">.</span><span class="nx">objectID</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">apartmentId</span><span class="p">;</span>
+    <span class="c1">// Write the update to the algolia index</span>
+    <span class="kd">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">initIndex</span><span class="p">(</span><span class="nx">ALGOLIA_INDEX_NAME</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="p">.</span><span class="nx">saveObject</span><span class="p">(</span><span class="nx">newValue</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+:ET

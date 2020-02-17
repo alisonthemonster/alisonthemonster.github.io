@@ -1,0 +1,47 @@
+I"3<p>Since going to Google IO back in May I was so excited to try out Flutter. I came back from IO and took <a href="https://www.appbrewery.co/p/flutter-development-bootcamp-with-dart">App Brewery’s Flutter course</a> (excellent course, highly recommend!) and then started to think about what I wanted my very first Flutter app to be.</p>
+
+<p>I’ve been working on various aspects of my Five Things project since 2017 and the current version had been feeling a bit stale. I decided it was time to give <strong>the mobile UI a refresh and to integrate with Google Cloud’s sentiment analysis tools</strong>.</p>
+
+<p>In just 21 days I was able to build a fully working app and the backend to support it. Flutter development is FAST. Here’s the final result:</p>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/7cjfyFD" data-context="false"><a href="//imgur.com/a/7cjfyFD"></a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<h3 id="features">Features</h3>
+<ul>
+  <li>A monthly dashboard
+    <ul>
+      <li>The monthly dashboard shows you an overall view of a month. It has all the days you’ve written for that month along with the sentiment scores for those entries</li>
+    </ul>
+  </li>
+  <li>Search
+    <ul>
+      <li>I used Algolia to index my data and make it searchable</li>
+    </ul>
+  </li>
+  <li>Sentiment Analysis
+    <ul>
+      <li>When the user writes a complete entry we analyze the sentiment of the entry and send it back to the user.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="architecture">Architecture</h3>
+<p>After lots of research and experimenting I settled on using the <a href="https://github.com/felangel/bloc">BLoC pattern</a> for this app. I chose this library because of it’s fantastic <a href="https://felangel.github.io/bloc/">documentation</a>, it’s similarity to MVI in Android (a pattern I’d been already researching), and it’s great tutorials.</p>
+
+<p>In the BLoC pattern your app responds to <code class="highlighter-rouge">events</code> and outputs different <code class="highlighter-rouge">states</code> accordingly. BLoC is built upon Dart’s Streams and RxDart and allows you to properly separate your business logic from your presentation logic.</p>
+
+<h3 id="backend">Backend</h3>
+<ul>
+  <li>Firebase Cloud Firestore</li>
+  <li>Cloud Functions
+    <ul>
+      <li>Call the Google Language sentiment analysis endpoint when a new, complete entry is written and writes the response back to the database</li>
+      <li>Index new entries with Algolia</li>
+    </ul>
+  </li>
+  <li>Firebase Authentication</li>
+</ul>
+
+<h3 id="summary">Summary</h3>
+<p>Working with Flutter is exciting and fast. I was able to build a prototype so quickly and was able to build it following architectural best practices. This was a great exercise and I look forward to what I can build next!</p>
+:ET

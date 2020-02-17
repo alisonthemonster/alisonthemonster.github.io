@@ -1,0 +1,43 @@
+I"…
+<p>I began the Five Things project as a daily handwritten journal. Over time this grew hard to maintain and most of my entries were stored on my computer waiting to be transcribed to my notebook. I built the Five Things website to have an easy way to write entries and to read over your old entries, but I still missed the idea of a physical journal.</p>
+
+<h3 id="design">Design</h3>
+<p>I got really carried away with designing the various books and page layouts. I envisioned Five Things supporting a wide range of book options and really pushed myself to come up with lots of ideas and variations. Here are some of my various sketches and designs</p>
+
+<h4 id="cover-ideas">Cover Ideas</h4>
+
+<p><img src="https://i.imgur.com/QkRseT0.png" width="240" /> 
+<img src="https://i.imgur.com/mdjBD14.png" width="240" /> 
+<img src="https://i.imgur.com/iuknKk4.png" width="240" /></p>
+
+<h4 id="page-layouts">Page Layouts</h4>
+
+<p><img src="https://i.imgur.com/W65wAmS.png" width="240" /> 
+<img src="https://i.imgur.com/oOEhPC0.png" width="240" /> 
+<img src="https://i.imgur.com/nBySO8p.png" width="240" /></p>
+
+<h3 id="generation">Generation</h3>
+
+<p>I researched the best ways to print your own books and the most popular method was through PDFs. So I looked into PDF generating libraries and found a few to try.</p>
+
+<h4 id="pdfjs">PDFJS</h4>
+<p><a href="https://github.com/rkusa/pdfjs">PDFJS</a> is a PDF generation library written in Javascript. I used it to create several templates that would parse my JSON data and generate the pages of my book. In total I created eight different templates that could print books in a variety of shapes, column styles, and designs. I used this library when I first began to play around with PDF generation.</p>
+
+<h4 id="jspdf">jsPDF</h4>
+<p><a href="https://github.com/MrRio/jsPDF">jsPDF</a> is a client side PDF library with more support and documentation than PDFJS. I recently tried this library out and found it had a lot more flexibility than PDFJS.</p>
+
+<h3 id="the-results">The Results</h3>
+<p><img src="https://i.imgur.com/iJ8Smtf.png" width="140" /> 
+<img src="https://i.imgur.com/H1GK9OY.png" width="140" /> 
+<img src="https://i.imgur.com/bbHlyP9.png" width="140" /> 
+<img src="https://i.imgur.com/XuahWgF.png" width="140" /> 
+<img src="https://i.imgur.com/Dym0Mh4.png" width="140" /> 
+<img src="https://i.imgur.com/y8hFltx.png" width="140" /> 
+<img src="https://i.imgur.com/opEF7Ff.png" width="140" /> 
+<img src="https://i.imgur.com/yXQSZl3.png" width="140" /> 
+<img src="https://i.imgur.com/ZgWU1ZN.png" width="140" /> 
+<img src="https://i.imgur.com/oGpbb0O.png" width="140" /></p>
+
+<p><img src="http://i.imgur.com/kMMbRY9.gif" height="600" /></p>
+
+:ET

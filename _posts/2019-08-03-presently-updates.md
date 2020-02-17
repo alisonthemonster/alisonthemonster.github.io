@@ -2,9 +2,9 @@
 layout: post
 title:  "Presently: What's new?"
 date:   2019-08-03 19:45:31 +0530
-categories: ["projects", "android"]
+categories: ["projects", "android", "presently"]
 ---
-Presently is an open sourch [Android app](https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&hl=en) to record daily gratitude entries. It's been a while since the initial release and I thought I'd post on update on all the new features and things I've learned along the way.
+Presently is an open source [Android app](https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&hl=en) to record daily gratitude entries. It's been a while since the initial release and I thought I'd post on update on all the new features and things I've learned along the way.
 
 ### New Features
   - Search your entries using Room's FTS

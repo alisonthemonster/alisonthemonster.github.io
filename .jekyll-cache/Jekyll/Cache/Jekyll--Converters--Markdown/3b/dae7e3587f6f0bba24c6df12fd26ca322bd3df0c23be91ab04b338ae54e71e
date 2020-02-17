@@ -1,0 +1,41 @@
+I"�<p>The Seattle Vintage Apartment Project is a database of pre-1940s apartments in Seattle. It includes over 300 buildings and has information about their age, architects, and the units inside.</p>
+
+<p><img src="https://i.imgur.com/PFQ4iDk.png" /></p>
+
+<p>The SVAP started in January 2019 when I began to look for a new apartment. I knew I wanted to live in a vintage apartment and I checked Craigslist every day for new buildings. I started to seriously research the buildings and kept an Excel spreadsheet of my favorites. It quickly outgrew itself and needed a much more permanent and scalable home.</p>
+
+<p>I decided to build an <strong>Android client that would be backed by a Firebase Cloudstore database</strong>. Using the app I could explore existing apartments, add new apartment buildings or units, and search through my database.</p>
+
+<h3 id="how-its-made">How it’s made</h3>
+
+<p>The SVAP is integrated with Google Maps and the Places API to present the map and to allow users to look up addresses and find their coordinates. I used SeatGeek’s <a href="https://github.com/seatgeek/android-PlacesAutocompleteTextView">Places Autocomplete Textview</a> to display the Places API results.</p>
+
+<p>In order to search through the SVAP I integrated the project with Algolia’s Instant Search product. I index my database using a Firebase Cloud Function (as described in <a href="/blogpost/android/svap/2019/02/09/algolia.html">this post</a>) and then used Algolia’s <a href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/android/">Instant Search Android SDK</a> to add a search view and search results to my app.</p>
+
+<p>New entries are posted up to the Firebase Cloudstore and any images are hosted in Firebase.</p>
+
+<h3 id="tech-stack">Tech Stack</h3>
+<ul>
+  <li>Navigation Architecture Component</li>
+  <li>ViewModel Architecture Component</li>
+  <li>LiveData</li>
+  <li>Data binding</li>
+  <li><a href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/android/">Algolia Instant Search Android SDK</a></li>
+  <li><a href="https://github.com/seatgeek/android-PlacesAutocompleteTextView">Places Autocomplete Textview</a></li>
+  <li><a href="https://github.com/jrvansuita/PickImage">PickImage</a> for image selection from a device</li>
+</ul>
+
+<h3 id="demo">Demo</h3>
+<p><img src="https://i.imgur.com/Bb38tN9.png" width="400" /></p>
+
+<h3 id="screenshots">Screenshots</h3>
+<p><img src="https://i.imgur.com/ie3AoBt.png" width="240" /> 
+<img src="https://i.imgur.com/ydyB6cZ.png" width="240" /> 
+<img src="https://i.imgur.com/rpKUAAw.png" width="240" /> 
+<img src="https://i.imgur.com/CMXa3pP.png" width="240" /> 
+<img src="https://i.imgur.com/nfEt3PA.png" width="240" /></p>
+
+<h3 id="future-plans">Future plans</h3>
+<p>I would love to create a website to allow anyone to view the Seattle Vintage Apartment Project. For now the Android client is the only way to add new data and view the apartments.</p>
+
+:ET

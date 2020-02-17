@@ -1,0 +1,26 @@
+I"D<p>Presently is an open source <a href="https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&amp;hl=en">gratitude journal for Android</a> that I started building about a year ago. We are launching a bunch of new features this month and I wanted to share them here!</p>
+
+<h3 id="new-features">New Features</h3>
+<ul>
+  <li>Biometric Authentication
+    <ul>
+      <li>Now users can lock their entries using biometric authentication. This feature is Presently’s first opens source contributed feature! Many thanks to <a href="https://github.com/lalon">Alon</a> who contributed this much requested feature.</li>
+    </ul>
+  </li>
+  <li>New themes and theming updates
+    <ul>
+      <li>I revamped our themes settings view to give a better representation of what applying a theme would look like</li>
+      <li>I also added several new themes to the app and I now support colorful icons in themes</li>
+    </ul>
+  </li>
+  <li>Milestones in your timeline
+    <ul>
+      <li>When a user reaches a significant milestone, like writing five gratitude entries, I show them a congratulations dialog to celebrate their acheivement. Now users can be reminded of their progress by seeing their milestones in their timelines.</li>
+      <li><img src="https://i.imgur.com/3kJmSTD.png" width="140" /></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Check it out here in the <a href="https://play.google.com/store/apps/details?id=journal.gratitude.com.gratitudejournal&amp;hl=en">Google Play Store</a>
+ and look at my source code on <a href="https://github.com/alisonthemonster/Presently">Github</a>!</p>
+:ET
