@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 <h2>Hiya! 👩‍💻</h2>
-<p>Hi there! I'm a software engineer working in Android!. I currently work at Dropbox as an Android Developer. When I'm not building Android apps you can find me scowering my local Goodwill or working on my garden. </p>
+<p>Hi there! I'm a software engineer working at Dropbox on the Android app! When I'm not building Android apps you can find me scowering my local Goodwill or working on my garden. </p>
 
 <div style="text-align: center"><img src="https://i.imgur.com/O5ptInB.png" width="400" /></div>
 
@@ -17,13 +17,12 @@ permalink: /about/
 
 2012-2016
 :   **BSA, Computer Science**; University of Texas at Austin
-:   *GPA: 3.58, minor in French*
 
 
 ### Projects
 ----------
 **Presently**
-:   Presently is a gratitude journaling app for Android. Presently is open source and uses the Android Architecture Components. 
+:   Presently is a gratitude journaling app for Android. Presently is open source and has over a million downloads. 
 Read more about it [here]({{ site.baseurl }}{% post_url 2019-04-20-presently %})!
 
 
